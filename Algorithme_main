@@ -5,6 +5,7 @@ tant que vrai:
     requete http
     recuperer le resultat du ping
     recuperer le resultat de la requete
+    calculer la valeur moyenne des requetes
   fin pour
   si erreur
     test not OK
