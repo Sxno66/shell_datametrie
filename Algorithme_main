@@ -1,10 +1,8 @@
 tant que vrai:
   pour chaque site dans liste_sites
     attendre 5 minutes
-    ping le serveur
-    requete http
-    recuperer le resultat du ping
-    recuperer le resultat de la requete
+    ping le serveur et requete http
+    recuperer le resultat du ping et de la requete
     calculer la valeur moyenne des requetes
   fin pour
   si erreur
