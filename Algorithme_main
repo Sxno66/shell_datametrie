@@ -1,0 +1,19 @@
+tant que vrai:
+  pour chaque site dans liste_sites
+    attendre 5 minutes
+    ping le serveur
+    requete http
+    recuperer le resultat du ping
+    recuperer le resultat de la requete
+  fin pour
+  si erreur
+    test not OK
+  sinon
+    test OK
+  fin si
+fin tant que
+
+attendre 24h
+sauvegarder les résultats dans txt
+creer une page html contenant tout les sites ping et les données du txt
+envoie du mail a addresse_client
