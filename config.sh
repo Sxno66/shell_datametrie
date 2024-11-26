@@ -1,8 +1,8 @@
 # config.sh
 
 # Configuration parameters
-serveurs=("www.ac-rennes.fr" "www.perplexity.ai" "www.google.com"  "www.twitch.tv") # Liste des serveurs
-intervalle=30 # temps en secondes
+serveurs=("www.ac-rennes.fr" "www.perplexity.ai" "www.google.com" "www.twitch.tv" "192.168.1.149")
+intervalle=30
 log_file="log_performance.csv"
-mail="destroyer.ghost55@gmail.com"
-max_response_time=200 # temps de réponse maximum en ms pour un test fructueux
+max_response_time=200
+EMAIL_TO="leo.pinzano@live.fr"
