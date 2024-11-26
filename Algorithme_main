@@ -1,20 +1,52 @@
-tant que vrai:
-  pour chaque site dans liste_sites
-    attendre 5 minutes
-    ping le serveur
-    requete http
-    recuperer le resultat du ping
-    recuperer le resultat de la requete
-    calculer la valeur moyenne des requetes
-  fin pour
-  si erreur
-    test not OK
-  sinon
-    test OK
-  fin si
-fin tant que
+DÉBUT
 
-attendre 24h
-sauvegarder les résultats dans txt
-creer une page html contenant tout les sites ping et les données du txt
-envoie du mail a addresse_client
+// Initialisation
+CHARGER configuration depuis config.sh
+INITIALISER variables statistiques (min_ping, max_ping, min_time, max_time, total_ping, total_time, test_count)
+
+SI fichier_log n'existe pas ALORS
+    CRÉER fichier_log
+    ÉCRIRE en-têtes dans fichier_log
+FIN SI
+
+TANT QUE vrai FAIRE
+    POUR CHAQUE serveur DANS liste_serveurs FAIRE
+        // Test de ping
+        EXÉCUTER ping sur serveur
+        RÉCUPÉRER résultat_ping
+
+        // Test de temps de chargement
+        EXÉCUTER requête HTTP sur serveur
+        RÉCUPÉRER temps_chargement
+
+        // Mise à jour des statistiques
+        METTRE À JOUR total_ping, total_time, test_count
+
+        SI temps_chargement < max_response_time ALORS
+            resultat ← "Réussi"
+        SINON
+            resultat ← "Échec"
+        FIN SI
+
+        // Mise à jour min/max
+        SI ping_result < min_ping ALORS min_ping ← ping_result FIN SI
+        SI ping_result > max_ping ALORS max_ping ← ping_result FIN SI
+        SI temps_chargement < min_time ALORS min_time ← temps_chargement FIN SI
+        SI temps_chargement > max_time ALORS max_time ← temps_chargement FIN SI
+
+        // Calcul des moyennes
+        CALCULER avg_ping
+        CALCULER avg_time
+
+        // Enregistrement des résultats
+        ÉCRIRE résultats dans fichier_log
+        AFFICHER résultats dans la console
+    FIN POUR
+
+    ATTENDRE pendant intervalle
+
+    // Réinitialisation des statistiques
+    RÉINITIALISER variables statistiques
+FIN TANT QUE
+
+FIN
